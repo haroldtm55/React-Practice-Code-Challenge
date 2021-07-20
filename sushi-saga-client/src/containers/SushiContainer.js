@@ -1,16 +1,23 @@
 import React, { Fragment } from 'react'
 import MoreButton from '../components/MoreButton'
+import Sushi from '../components/Sushi'
 
-const SushiContainer = (props) => {
+const SushiContainer = ({sushis, indexes, handleIndexes, handleSushiAndBudget, sushisEaten}) => {
+
+  
   return (
     <Fragment>
       <div className="belt">
         {
-          /* 
-             Render Sushi components here!
-          */
+         sushis.slice(indexes.initialIndex,indexes.finalIndex).map((sushi,mappedIndex) => (
+          <Sushi 
+            key={mappedIndex} 
+            sushiIndex={mappedIndex+indexes.initialIndex} 
+            sushi={sushi} 
+            handleSushiAndBudget={handleSushiAndBudget} 
+            sushiEaten={sushisEaten[mappedIndex+indexes.initialIndex]}/>))
         }
-        <MoreButton />
+        <MoreButton handleIndexes={handleIndexes}/>
       </div>
     </Fragment>
   )
